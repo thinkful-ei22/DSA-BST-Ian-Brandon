@@ -161,9 +161,9 @@ class BinarySearchTree {
 //output number
 
 
-// function bstHeight (tree){
-//   return Math.max(tree.left && bstHeight(tree.left), tree.right && bstHeight(tree.right))+1;
-// }
+function bstHeight (tree){
+  return Math.max(tree.left && bstHeight(tree.left), tree.right && bstHeight(tree.right))+1;
+}
 
 
 function bstHeight2(tree) {
@@ -220,8 +220,12 @@ const isItBST = (tree, min, max) => {
                   5
                 /   \
                3     7
-              / \   / \
-             2   4 6   8
+              /     /  \
+             2     6    8
+            /
+           1
+          /
+         0
 
 - Find largest node (9)
 - Find the parent of that node (8)
@@ -243,12 +247,34 @@ const thirdLargestNode = (tree) => {
   return thirdLargest.value;
 };
 
+//----------------balanced tree-----------------
+//input tree
+//boolean output
+//find the farthest away and find differece from other node?
+
+const balancedTree2 = tree => {
+    let min = tree._findMin();
+    let max = tree._findMax();
+    let minHeight = bstHeight(min);
+    let maxHeight = bstHeight(max);
+    console.log("minHeight", minHeight);
+    console.log("maxHeight", maxHeight)
+    if(Math.abs( minHeight - maxHeight) > 1 ){
+        return false;
+    } else {
+        return true;
+    }
+}
+
+
+
+
 
 
 const main = () => {
 
 
-  let testTree = new BinarySearchTree(5, 5);
+  let testTree = new BinarySearchTree(6, 6);
   //   testTree.left = new BinarySearchTree(2, 'z');
   //   testTree.right = new BinarySearchTree(4, 'z');
   testTree.insert(1, 1);
@@ -258,15 +284,16 @@ const main = () => {
   testTree.insert(6, 6);
   testTree.insert(7, 7);
   testTree.insert(8, 8);
-  testTree.insert(9, 9);
+//   testTree.insert(9, 9);
 
 
-  //console.log(testTree);
+  console.log(testTree);
   // console.log(testTree.left);
   //   console.log('The height of the search tree is',bstHeight2(testTree));
-  //   console.log(isItBST(testTree));
+    // console.log(isItBST(testTree));
 
-  console.log(thirdLargestNode(testTree));
+//   console.log(thirdLargestNode(testTree));
+  console.log(balancedTree2(testTree));
 
 };
 
